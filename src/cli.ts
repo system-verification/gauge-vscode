@@ -105,7 +105,9 @@ export class CLI {
         if (platform() === 'win32') validExecExt.push(".bat", ".exe", ".cmd");
         for (const ext of validExecExt) {
             let executable = `${command}${ext}`;
-            if (!spawnSync(executable).error) return executable;
+            if (!spawnSync(executable, { shell: true }).error) {
+                return executable;
+            }
         }
     }
 
